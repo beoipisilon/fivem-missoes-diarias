@@ -296,9 +296,11 @@ function API.finishMission()
 end
 
 -- Salva o cache do usuário
-function Users:Save(user_id)
+function Users:Save(user_id, source)
     local user = Users:get(user_id)
     if not user then return end
+
+    Player(source).state:set('startMission', false, true)
 
     exports.oxmysql:execute("UPDATE daily_missions SET claimed_missions = ?, last_mission = ?, last_claim = ? WHERE user_id = ?", {
         json.encode(user.claimed_missions), user.last_mission, user.last_claim, user_id
@@ -310,7 +312,7 @@ AddEventHandler('vRP:playerLeave', function(source, reason)
     local source = source
     local user_id = vRP.getUserId(source)
     if user_id then
-        Users:Save(user_id)
+        Users:Save(user_id, source)
     end
 end)
 

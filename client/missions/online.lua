@@ -1,6 +1,3 @@
-Citizen.CreateThread(function ()
-    mission_online()
-end)
 function mission_online()
     -- verifica o estado do jogador se ele está com alguma missão ativa
     if Remote.getStartMission() then
