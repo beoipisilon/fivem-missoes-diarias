@@ -90,7 +90,7 @@ end)
 AddEventHandler('vRP:playerSpawn', function(userId, source, firstSpawn)
     local user_id = vRP.getUserId(source)
     if user_id then
-        Users:Create(user_id)
+        Users:Create(source)
     end
 end)
 
